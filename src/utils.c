@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <ctype.h>
 
 
 int setZero(char * str) {

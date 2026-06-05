@@ -1,5 +1,9 @@
 #include "dirbuster-ng.h"
 
+/* forward declarations for functions used before their definition */
+int usage();
+int version();
+
 /*we split the argument parsing from main()
 because it's more clear */
 int parse_arguments(int argc, char **argv)
@@ -9,10 +13,11 @@ int parse_arguments(int argc, char **argv)
     int index;
     int c;
     int opterr = 0;	
-    while ((c = getopt(argc, argv, "hqvVw:d:e:n:t:X:K:u:U:W:")) != -1) {
+    while ((c = getopt(argc, argv, "hqvVw:d:e:n:t:X:A:K:u:U:W:")) != -1) {
 		switch (c) {
 			case 'v':
-		  		return;
+		  		version();
+		  		exit(0);
 			case 'w':
     	    	conf0.nb_workers = atoi(optarg);
 		    	break;
@@ -142,7 +147,7 @@ void* dbng_engine(void* queue_arg)
 	url = (char*) malloc(final_url_len * sizeof(char) );
 	setZeroN(url,final_url_len);
 	strncpy(url,conf0.host,strlen(conf0.host));
-	strncat(url,"/",1 * sizeof(char));  
+	strcat(url,"/");
 	strncat(url,wl,strlen(wl));
     free(wl);
 	  

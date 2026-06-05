@@ -1,5 +1,6 @@
 #include "uagents.h"
 #include <strings.h>
+#include <string.h>
 #include <stdlib.h>
 
 const char* uagents[] = {

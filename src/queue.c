@@ -10,7 +10,7 @@ struct queue *queue_add(struct queue *s, char* str)
 	return s;
     }
 
-	p->entry  = (char*) calloc (0,(strlen(str) +1) * sizeof(char));
+	p->entry  = (char*) calloc ((strlen(str) +1), sizeof(char));
 	strncpy(p->entry,str,strlen(str));
     p->next = NULL;
 
