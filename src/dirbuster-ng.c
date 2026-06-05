@@ -284,9 +284,9 @@ Options:\n -w <nb_threads>\tDefines the number of threads to use to make the att
  \t\tsaf: Apple Safari\n\
  \t\tope: Opera\n\
  \t\topem: Opera Mobile\n\
- \t\tie: Microsoft Internet Explorer\n\
- \t\tfen: Mozilla Fennec\n\
- \t\tbb: RIM BlackBerry Browser\n\
+ \t\tie: Microsoft Edge\n\
+ \t\tfen: Firefox for Android\n\
+ \t\tbb: Android Mobile (Chrome)\n\
  \t\tgbot: Google Bot\n\
  \t\tbing: Microsoft Bing Crawler\n\
  \t\tbspid: Baidu Spider\n\

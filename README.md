@@ -110,9 +110,9 @@ The target URL is always the **last** argument.
 | `saf`   | Apple Safari |
 | `ope`   | Opera |
 | `opem`  | Opera Mobile |
-| `ie`    | Microsoft Internet Explorer |
-| `fen`   | Mozilla Fennec |
-| `bb`    | RIM BlackBerry Browser |
+| `ie`    | Microsoft Edge |
+| `fen`   | Firefox for Android |
+| `bb`    | Android Mobile (Chrome) |
 | `gbot`  | Google Bot |
 | `bing`  | Microsoft Bing Crawler |
 | `bspid` | Baidu Spider |
