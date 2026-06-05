@@ -132,9 +132,16 @@ void* dbng_engine(void* queue_arg)
 	curl_easy_setopt(curl, CURLOPT_USERPWD,conf0.http_auth);
   }
 	
-  while(db_queue->head) {
-	  
+  for(;;) {
+
+	/* Check head and pop it while holding the lock. Testing db_queue->head
+	   outside the mutex is a race: another worker can empty the queue between
+	   the test and the dereference, leaving head == NULL -> segfault. */
 	pthread_mutex_lock(db_queue->mutex);
+	if (!db_queue->head) {
+		pthread_mutex_unlock(db_queue->mutex);
+		break;
+	}
 	wl_len = strlen(db_queue->head->entry)+1;
     wl = (char*) malloc (wl_len * sizeof(char));
 	setZeroN(wl,wl_len);
@@ -192,11 +199,14 @@ int load_dict(struct queue* db_queue) {
     }
   }
   else {
-    while (!feof(dict_fh)) {
-    fgets(buffer,4096*sizeof(char),dict_fh);
-	//handling of recursion ?? 
+    while (fgets(buffer,4096*sizeof(char),dict_fh)) {
+      size_t entry_len = strlen(buffer);
+      //fgets stores the trailing newline; strip it so the URL is well-formed
+      //(libcurl rejects control chars in the URL -> CURLE_URL_MALFORMAT)
+      if (entry_len && buffer[entry_len-1]=='\n') buffer[entry_len-1]='\0';
+	//handling of recursion ??
     //( dup the queue to keep an initial copy, save found dirs)
-    queue_add(db_queue,buffer);
+      queue_add(db_queue,buffer);
     }
   }
 
