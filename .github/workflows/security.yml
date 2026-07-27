@@ -9,3 +9,5 @@ on:
 jobs:
   scan:
     uses: ulises2k/security-workflows/.github/workflows/trivy-reusable.yml@main
+  gitleaks:
+    uses: ulises2k/security-workflows/.github/workflows/gitleaks-reusable.yml@main
